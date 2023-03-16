@@ -61,7 +61,6 @@ def predict_location(data, budget, city, property_type):
     webbrowser.open('file://' + temp_file.name, new=2)
     print(f"The predicted price for a {property_type.lower()} in {city} with a period of {period} months is approximately {predicted_price_period:.2f} PKR.")
 
-
 if __name__ == "__main__":
     data = pd.read_csv('zameen_data.csv')
 

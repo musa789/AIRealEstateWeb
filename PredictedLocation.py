@@ -43,7 +43,7 @@ def predict_location(data, budget, city, property_type):
         price = row['price']
         lat = row['latitude']
         lon = row['longitude']
-        tooltip = f"Price: {price} PKR"
+        tooltip = "Price: " + str(price) + " PKR"
         folium.Marker([lat, lon], tooltip=tooltip).add_to(m)
         # Add marker for predicted location
         predicted_lat = filtered_data.iloc[0]['latitude'] + 0.001

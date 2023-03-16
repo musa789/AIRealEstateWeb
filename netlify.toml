@@ -1,0 +1,3 @@
+[build]
+  command = "python PredictedLocation.py"
+  functions = "functions"

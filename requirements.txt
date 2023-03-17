@@ -4,5 +4,4 @@ scikit-learn
 folium
 branca
 tensorflow
-webbrowser
 tempfile

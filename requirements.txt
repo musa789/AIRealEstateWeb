@@ -3,7 +3,6 @@ aenum
 aiofiles 
 altair 
 antlr4-python3-runtime 
-async-timeout 
 attrs 
 autopep8 
 axios 

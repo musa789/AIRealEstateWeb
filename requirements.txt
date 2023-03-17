@@ -12,7 +12,6 @@ cachetools
 certifi 
 cffi 
 charset-normalizer 
-clean-fid 
 click 
 colorama 
 coloredlogs 

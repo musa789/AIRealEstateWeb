@@ -3,7 +3,6 @@ aenum
 aiofiles 
 altair 
 antlr4-python3-runtime 
-anyio 
 async-generator 
 async-timeout 
 attrs 

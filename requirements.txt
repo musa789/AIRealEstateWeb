@@ -1,7 +1,6 @@
 addict 
 aenum 
 aiofiles 
-aiohttp 
 aiosignal 
 altair 
 antlr4-python3-runtime 

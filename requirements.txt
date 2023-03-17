@@ -15,7 +15,6 @@ charset-normalizer
 click 
 colorama 
 coloredlogs 
-cuda-python 
 cycler 
 Cython 
 deprecation 

@@ -5,7 +5,6 @@ altair
 antlr4-python3-runtime 
 attrs 
 autopep8 
-basicsr 
 beautifulsoup4 
 blendmodes 
 boltons 

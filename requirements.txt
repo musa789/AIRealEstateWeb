@@ -15,7 +15,6 @@ charset-normalizer
 click 
 colorama 
 coloredlogs 
-contourpy 
 cuda-python 
 cycler 
 Cython 

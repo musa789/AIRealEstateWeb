@@ -5,7 +5,14 @@ scikit-learn
 scipy 
 selenium 
 tensorflow
-grpcio
+grpcio==1.39.0
+grpcio-tools==1.39.0
+grpcio-status==1.39.0
+grpcio-reflection==1.39.0
+grpcio-health-checking==1.39.0
+grpcio-channelz==1.39.0
+grpcio-testing==1.39.0
+cython==0.29.23
 six
 requests
 branca

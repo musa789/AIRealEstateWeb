@@ -1,5 +1,4 @@
 import pandas as pd
-import urllib.request
 from sklearn.ensemble import RandomForestRegressor
 import folium
 import webbrowser

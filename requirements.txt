@@ -15,5 +15,5 @@ grpcio-testing==1.39.0
 cython==0.29.23
 six==1.15.0
 branca
-urllib
+
 

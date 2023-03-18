@@ -5,4 +5,4 @@ scikit-learn
 scipy 
 selenium 
 tensorflow
-grpcio
+--no-binary grpcio

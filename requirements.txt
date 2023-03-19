@@ -1,8 +1,8 @@
+python ==3.8.0
 absl-py
 addict==2.4.0
 aenum==3.1.11
 aiofiles
-aiohttp
 aiosignal==1.3.1
 altair==4.2.2
 antlr4-python3-runtime==4.9.3

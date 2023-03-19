@@ -77,4 +77,5 @@ def predict():
     return render_template('result.html', property_type=property_type.lower(), city=city, period=period, predicted_price=predicted_price_period, map_file=map_file)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
+

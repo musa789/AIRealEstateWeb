@@ -1,8 +1,9 @@
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 import folium
-from flask import Flask, request, jsonify
+import webbrowser
 import tempfile
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -25,18 +26,9 @@ def predict_price(filtered_data, period):
     return predicted_price_period
 
 
-@app.route('/', methods=['POST'])
-def predict_location():
-    # Load data
-    data = pd.read_csv('zameen_data.csv')
-
-    # Get input from request
-    budget = int(request.json['budget'])
-    city = request.json['city']
-    property_type = request.json['property_type']
-    period = request.json['period']
-
+def predict_location(data, budget, city, property_type, period):
     filtered_data = filter_data(data, budget, city, property_type)
+
     predicted_price_period = predict_price(filtered_data, period)
 
     # Create map centered on the first property in filtered_data
@@ -50,27 +42,39 @@ def predict_location():
         price = row['price']
         lat = row['latitude']
         lon = row['longitude']
-        tooltip = f"Price: {price} PKR"
+        tooltip = "Price: " + str(price) + " PKR"
         folium.Marker([lat, lon], tooltip=tooltip).add_to(m)
+        # Add marker for predicted location
+        predicted_lat = filtered_data.iloc[0]['latitude'] + 0.001
+        predicted_lon = filtered_data.iloc[0]['longitude'] + 0.001
+        predicted_tooltip = "Predicted Price: {:.2f} PKR".format(predicted_price_period)
+        folium.Marker([predicted_lat, predicted_lon], tooltip=predicted_tooltip, icon=folium.Icon(color='green')).add_to(m)
 
-    # Add marker for predicted location
-    predicted_lat = filtered_data.iloc[0]['latitude'] + 0.001
-    predicted_lon = filtered_data.iloc[0]['longitude'] + 0.001
-    predicted_tooltip = f"Predicted Price: {predicted_price_period:.2f} PKR"
-    folium.Marker([predicted_lat, predicted_lon], tooltip=predicted_tooltip, icon=folium.Icon(color='green')).add_to(m)
 
     # Save map to temporary HTML file
     temp_file = tempfile.NamedTemporaryFile(suffix='.html', delete=False)
     temp_file.close()
     m.save(temp_file.name)
 
-    # Return predicted price and map as JSON response
-    response = {
-        'predicted_price': predicted_price_period,
-        'map_url': 'file://' + temp_file.name
-    }
-    return jsonify(response)
+    return predicted_price_period, temp_file.name
 
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-if __name__ == "__main__":
-    app.run()
+@app.route('/predict', methods=['POST'])
+def predict():
+    data = pd.read_csv('zameen_data.csv')
+
+    budget = int(request.form.get('budget'))
+    city = request.form.get('city')
+    property_type = request.form.get('property_type')
+    period = request.form.get('period')
+
+    predicted_price_period, map_file = predict_location(data, budget, city, property_type, period)
+
+    # Open map in browser and display predicted price
+    return render_template('result.html', property_type=property_type.lower(), city=city, period=period, predicted_price=predicted_price_period, map_file=map_file)
+
+if __name__ == '__main__':
+    app.run(debug=True)

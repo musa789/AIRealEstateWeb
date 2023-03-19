@@ -1,6 +1,6 @@
 pandas
 folium
 scikit-learn
-grpcio
+grpcio==1.41.1
 tensorflow
 
